@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adita.PlexNet.Core.Dialogs", "Adita.PlexNet.Core.Dialogs\Adita.PlexNet.Core.Dialogs.csproj", "{C1E1B6F6-78B3-45CA-871B-2BC8B30DA454}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adita.PlexNet.Core.Dialogs", "Adita.PlexNet.Core.Dialogs\Adita.PlexNet.Core.Dialogs.csproj", "{C1E1B6F6-78B3-45CA-871B-2BC8B30DA454}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adita.PlexNet.Core.Dialogs.Test", "Adita.PlexNet.Core.Dialogs.Test\Adita.PlexNet.Core.Dialogs.Test.csproj", "{514DC0A3-6AA0-4898-AD3B-4FE2AD45EB5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C1E1B6F6-78B3-45CA-871B-2BC8B30DA454}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1E1B6F6-78B3-45CA-871B-2BC8B30DA454}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1E1B6F6-78B3-45CA-871B-2BC8B30DA454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{514DC0A3-6AA0-4898-AD3B-4FE2AD45EB5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{514DC0A3-6AA0-4898-AD3B-4FE2AD45EB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{514DC0A3-6AA0-4898-AD3B-4FE2AD45EB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{514DC0A3-6AA0-4898-AD3B-4FE2AD45EB5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
