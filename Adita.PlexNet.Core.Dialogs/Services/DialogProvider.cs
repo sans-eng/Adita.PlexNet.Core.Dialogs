@@ -32,7 +32,7 @@ namespace Adita.PlexNet.Core.Dialogs
         /// <returns>The <see cref="IDialog" /> instance.</returns>
         public IDialog? GetDialog<TDialog>() where TDialog : IDialog
         {
-            return serviceProvider.CreateScope().ServiceProvider.GetService<TDialog>();
+            return serviceProvider.GetService<TDialog>();
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Adita.PlexNet.Core.Dialogs
         /// <returns>The <see cref="IDialog" /> instance.</returns>
         public IDialog<TReturn>? GetDialog<TDialog, TReturn>() where TDialog : IDialog<TReturn>
         {
-            return serviceProvider.CreateScope().ServiceProvider.GetService<TDialog>();
+            return serviceProvider.GetService<TDialog>();
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Adita.PlexNet.Core.Dialogs
         /// <returns>The <see cref="IDialog" /> instance.</returns>
         public IDialog<TReturn, TParam>? GetDialog<TDialog, TReturn, TParam>() where TDialog : IDialog<TReturn, TParam>
         {
-            return serviceProvider.CreateScope().ServiceProvider.GetService<TDialog>();
+            return serviceProvider.GetService<TDialog>();
         }
         #endregion Public methods
     }

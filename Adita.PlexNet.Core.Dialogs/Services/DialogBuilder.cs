@@ -39,7 +39,7 @@ namespace Adita.PlexNet.Core.Dialogs
                 throw new ArgumentException($"The specified {nameof(TDialog)} is not the implementation of dialog interface.");
             }
 
-            Services.AddScoped<TDialog>();
+            Services.AddTransient<TDialog>();
 
             return this;
         }

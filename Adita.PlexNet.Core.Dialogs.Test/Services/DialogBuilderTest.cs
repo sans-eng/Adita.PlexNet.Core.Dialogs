@@ -27,6 +27,19 @@ namespace Adita.PlexNet.Core.Dialogs.Test.Services
 
             IDialog<double?, string>? dialog3 = serviceProvider.GetService<DialogWithReturnAndParamDummy>();
             Assert.IsNotNull(dialog3);
+
+            IDialog? dialog11 = serviceProvider.GetService<DialogDummy>();
+            Assert.IsNotNull(dialog11);
+
+            IDialog<double?>? dialog21 = serviceProvider.GetService<DialogWithReturnDummy>();
+            Assert.IsNotNull(dialog21);
+
+            IDialog<double?, string>? dialog31 = serviceProvider.GetService<DialogWithReturnAndParamDummy>();
+            Assert.IsNotNull(dialog31);
+
+            Assert.AreNotEqual(dialog1, dialog11);
+            Assert.AreNotEqual(dialog2, dialog21);
+            Assert.AreNotEqual(dialog3, dialog31);
         }
     }
 }

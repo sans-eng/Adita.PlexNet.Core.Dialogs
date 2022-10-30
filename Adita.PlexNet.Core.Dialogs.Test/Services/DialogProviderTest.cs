@@ -1,5 +1,6 @@
 ﻿using Adita.PlexNet.Core.Dialogs.Test.Models;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Adita.PlexNet.Core.Dialogs.Test.Services
 {
@@ -10,7 +11,7 @@ namespace Adita.PlexNet.Core.Dialogs.Test.Services
         public void CanProvideDialog()
         {
             IServiceCollection services = new ServiceCollection();
-            services.AddScoped<DialogDummy>();
+            services.AddTransient<DialogDummy>();
             services.AddScoped<IDialogProvider, DialogProvider>();
 
             IServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -42,7 +43,7 @@ namespace Adita.PlexNet.Core.Dialogs.Test.Services
         public void CanProvideDialogWithReturnAndParam()
         {
             IServiceCollection services = new ServiceCollection();
-            services.AddScoped<DialogWithReturnAndParamDummy>();
+            services.AddTransient<DialogWithReturnAndParamDummy>();
             services.AddScoped<IDialogProvider, DialogProvider>();
 
             IServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -52,6 +53,28 @@ namespace Adita.PlexNet.Core.Dialogs.Test.Services
 
             IDialog<double?, string>? dialog = dialogProvider.GetDialog<DialogWithReturnAndParamDummy, double?, string>();
             Assert.IsNotNull(dialog);
+        }
+
+        [TestMethod]
+        public void CanResolveNewInstance()
+        {
+            IServiceCollection services = new ServiceCollection();
+            services.AddTransient<DialogDummy>();
+            services.AddScoped<IDialogProvider, DialogProvider>();
+
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            IDialogProvider? dialogProvider = serviceProvider.GetService<IDialogProvider>();
+            Assert.IsNotNull(dialogProvider);
+
+            IDialog? dialog = dialogProvider.GetDialog<DialogDummy>();
+            Assert.IsNotNull(dialog);
+
+            IDialog? dialog1 = dialogProvider.GetDialog<DialogDummy>();
+            Assert.IsNotNull(dialog);
+
+            Assert.AreNotEqual(dialog, dialog1);
+
         }
     }
 }
