@@ -6,7 +6,7 @@
         [TestMethod]
         public void CanCreateGeneric()
         {
-            DialogResult dialogResult = new(DialogAction.Accept);
+            DialogResult dialogResult = new(DialogActionResult.Accept);
             DialogRequestClosingEventArgs args = new(dialogResult);
 
             Assert.IsNotNull(args);
@@ -16,7 +16,7 @@
         [TestMethod]
         public void CanCreateGeneric1()
         {
-            DialogResult<int> dialogResult = new(DialogAction.Accept);
+            DialogResult<int> dialogResult = new(DialogActionResult.Accept);
             DialogRequestClosingEventArgs<int> args = new(dialogResult);
 
             Assert.IsNotNull(args);

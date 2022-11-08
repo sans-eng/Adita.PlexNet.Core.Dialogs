@@ -9,8 +9,8 @@
         /// <summary>
         /// Initialize a new instance of <see cref="DialogResult{T}"/> using specified <paramref name="action"/>.
         /// </summary>
-        /// <param name="action">A <see cref="DialogAction"/> of a dialog.</param>
-        public DialogResult(DialogAction action)
+        /// <param name="action">A <see cref="DialogActionResult"/> of a dialog.</param>
+        public DialogResult(DialogActionResult action)
         {
             Action = action;
         }
@@ -18,9 +18,9 @@
 
         #region Public properties
         /// <summary>
-        /// Gets a <see cref="DialogAction"/> of current <see cref="DialogResult{T}"/>.
+        /// Gets a <see cref="DialogActionResult"/> of current <see cref="DialogResult"/>.
         /// </summary>
-        public DialogAction Action { get; }
+        public DialogActionResult Action { get; }
         #endregion Public properties
     }
 }

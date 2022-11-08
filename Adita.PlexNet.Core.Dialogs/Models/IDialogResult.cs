@@ -7,9 +7,9 @@
     {
         #region Properties
         /// <summary>
-        /// Gets a <see cref="DialogAction"/> of current <see cref="IDialogResult"/>.
+        /// Gets a <see cref="DialogActionResult"/> of current <see cref="IDialogResult"/>.
         /// </summary>
-        DialogAction Action { get; }
+        DialogActionResult Action { get; }
         #endregion Properties
     }
 }

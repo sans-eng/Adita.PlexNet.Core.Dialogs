@@ -8,27 +8,27 @@
         {
             DialogDummy dialog = new();
 
-            DialogAction dialogAction = DialogAction.None;
+            DialogActionResult dialogAction = DialogActionResult.None;
 
             dialog.RequestClosing += (_, e) => dialogAction = e.DialogResult.Action;
 
             dialog.CallAccept();
-            Assert.IsTrue(dialogAction == DialogAction.Accept);
+            Assert.IsTrue(dialogAction == DialogActionResult.Accept);
 
             dialog.CallRefuse();
-            Assert.IsTrue(dialogAction == DialogAction.Refuse);
+            Assert.IsTrue(dialogAction == DialogActionResult.Refuse);
 
             dialog.CallSubmit();
-            Assert.IsTrue(dialogAction == DialogAction.Submit);
+            Assert.IsTrue(dialogAction == DialogActionResult.Submit);
 
             dialog.CallCancel();
-            Assert.IsTrue(dialogAction == DialogAction.Cancel);
+            Assert.IsTrue(dialogAction == DialogActionResult.Cancel);
 
             dialog.CallIgnore();
-            Assert.IsTrue(dialogAction == DialogAction.Ignore);
+            Assert.IsTrue(dialogAction == DialogActionResult.Ignore);
 
             dialog.CallAbort();
-            Assert.IsTrue(dialogAction == DialogAction.Abort);
+            Assert.IsTrue(dialogAction == DialogActionResult.Abort);
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@
         {
             DialogWithReturnDummy dialog = new();
 
-            DialogAction dialogAction = DialogAction.None;
+            DialogActionResult dialogAction = DialogActionResult.None;
             double? returnValue = default;
 
             dialog.RequestClosing += (_, e) =>
@@ -46,27 +46,27 @@
             };
 
             dialog.CallAccept();
-            Assert.IsTrue(dialogAction == DialogAction.Accept);
+            Assert.IsTrue(dialogAction == DialogActionResult.Accept);
             Assert.IsNull(returnValue);
 
             dialog.CallRefuse();
-            Assert.IsTrue(dialogAction == DialogAction.Refuse);
+            Assert.IsTrue(dialogAction == DialogActionResult.Refuse);
             Assert.IsNull(returnValue);
 
             dialog.CallSubmit(20);
-            Assert.IsTrue(dialogAction == DialogAction.Submit);
+            Assert.IsTrue(dialogAction == DialogActionResult.Submit);
             Assert.IsTrue(returnValue == 20);
 
             dialog.CallCancel();
-            Assert.IsTrue(dialogAction == DialogAction.Cancel);
+            Assert.IsTrue(dialogAction == DialogActionResult.Cancel);
             Assert.IsNull(returnValue);
 
             dialog.CallIgnore();
-            Assert.IsTrue(dialogAction == DialogAction.Ignore);
+            Assert.IsTrue(dialogAction == DialogActionResult.Ignore);
             Assert.IsNull(returnValue);
 
             dialog.CallAbort();
-            Assert.IsTrue(dialogAction == DialogAction.Abort);
+            Assert.IsTrue(dialogAction == DialogActionResult.Abort);
             Assert.IsNull(returnValue);
         }
 
@@ -76,7 +76,7 @@
             DialogWithReturnAndParamDummy dialog = new();
             dialog.Initialize("Test");
 
-            DialogAction dialogAction = DialogAction.None;
+            DialogActionResult dialogAction = DialogActionResult.None;
             double? returnValue = default;
 
             dialog.RequestClosing += (_, e) =>
@@ -86,28 +86,62 @@
             };
 
             dialog.CallAccept();
-            Assert.IsTrue(dialogAction == DialogAction.Accept);
+            Assert.IsTrue(dialogAction == DialogActionResult.Accept);
             Assert.IsNull(returnValue);
 
             dialog.CallRefuse();
-            Assert.IsTrue(dialogAction == DialogAction.Refuse);
+            Assert.IsTrue(dialogAction == DialogActionResult.Refuse);
             Assert.IsNull(returnValue);
 
             dialog.CallSubmit(20);
-            Assert.IsTrue(dialogAction == DialogAction.Submit);
+            Assert.IsTrue(dialogAction == DialogActionResult.Submit);
             Assert.IsTrue(returnValue == 20);
 
             dialog.CallCancel();
-            Assert.IsTrue(dialogAction == DialogAction.Cancel);
+            Assert.IsTrue(dialogAction == DialogActionResult.Cancel);
             Assert.IsNull(returnValue);
 
             dialog.CallIgnore();
-            Assert.IsTrue(dialogAction == DialogAction.Ignore);
+            Assert.IsTrue(dialogAction == DialogActionResult.Ignore);
             Assert.IsNull(returnValue);
 
             dialog.CallAbort();
-            Assert.IsTrue(dialogAction == DialogAction.Abort);
+            Assert.IsTrue(dialogAction == DialogActionResult.Abort);
             Assert.IsNull(returnValue);
+
+            Assert.IsTrue(dialog.Parameter == "Test");
+        }
+
+        [TestMethod]
+        public void CanCreateParamOnlyDialog()
+        {
+            ParamOnlyDialogDummy dialog = new();
+            dialog.Initialize("Test");
+
+            DialogActionResult dialogAction = DialogActionResult.None;
+
+            dialog.RequestClosing += (_, e) =>
+            {
+                dialogAction = e.DialogResult.Action;
+            };
+
+            dialog.CallAccept();
+            Assert.IsTrue(dialogAction == DialogActionResult.Accept);
+
+            dialog.CallRefuse();
+            Assert.IsTrue(dialogAction == DialogActionResult.Refuse);
+
+            dialog.CallSubmit();
+            Assert.IsTrue(dialogAction == DialogActionResult.Submit);
+
+            dialog.CallCancel();
+            Assert.IsTrue(dialogAction == DialogActionResult.Cancel);
+
+            dialog.CallIgnore();
+            Assert.IsTrue(dialogAction == DialogActionResult.Ignore);
+
+            dialog.CallAbort();
+            Assert.IsTrue(dialogAction == DialogActionResult.Abort);
 
             Assert.IsTrue(dialog.Parameter == "Test");
         }
