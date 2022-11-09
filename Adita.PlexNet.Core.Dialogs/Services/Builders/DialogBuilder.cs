@@ -1,5 +1,4 @@
-﻿using Adita.PlexNet.Core.Dialogs.Services.ContainerFactories;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Adita.PlexNet.Core.Dialogs
@@ -49,7 +48,8 @@ namespace Adita.PlexNet.Core.Dialogs
             {
                 Services.TryAddScoped(typeof(IDialogContainerFactory<>).MakeGenericType(typeof(TDialog)), typeof(DialogContainerFactory<>).MakeGenericType(typeof(TDialog)));
 
-                Services.TryAddScoped(typeof(DialogService<>).MakeGenericType(typeof(TDialog)));
+                Services.TryAddScoped(typeof(IDialogService<>).MakeGenericType(typeof(TDialog)),
+                    typeof(DialogService<>).MakeGenericType(typeof(TDialog)));
             }
             else if (IsDialogWithReturn(typeof(TDialog)))
             {
@@ -58,7 +58,8 @@ namespace Adita.PlexNet.Core.Dialogs
                 Services.TryAddScoped(typeof(IDialogContainerFactory<,>).MakeGenericType(typeof(TDialog), returnType),
                     typeof(DialogContainerFactory<,>).MakeGenericType(typeof(TDialog), returnType));
 
-                Services.TryAddScoped(typeof(DialogService<,>).MakeGenericType(typeof(TDialog), returnType));
+                Services.TryAddScoped(typeof(IDialogService<,>).MakeGenericType(typeof(TDialog), returnType),
+                    typeof(DialogService<,>).MakeGenericType(typeof(TDialog), returnType));
             }
             else if (IsDialogWithReturnAndParam(typeof(TDialog)))
             {
@@ -68,7 +69,8 @@ namespace Adita.PlexNet.Core.Dialogs
                 Services.TryAddScoped(typeof(IDialogContainerFactory<,,>).MakeGenericType(typeof(TDialog), returnType, paramType),
                    typeof(DialogContainerFactory<,,>).MakeGenericType(typeof(TDialog), returnType, paramType));
 
-                Services.TryAddScoped(typeof(DialogService<,,>).MakeGenericType(typeof(TDialog), returnType, paramType));
+                Services.TryAddScoped(typeof(IDialogService<,,>).MakeGenericType(typeof(TDialog), returnType, paramType),
+                    typeof(DialogService<,,>).MakeGenericType(typeof(TDialog), returnType, paramType));
             }
             else if (IsParamOnlyDialog(typeof(TDialog)))
             {
