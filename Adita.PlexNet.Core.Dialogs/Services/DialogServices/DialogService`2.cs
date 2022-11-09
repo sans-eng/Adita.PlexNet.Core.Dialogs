@@ -18,6 +18,7 @@ namespace Adita.PlexNet.Core.Dialogs
         private readonly IDialogViewProvider _dialogViewProvider;
         private readonly DialogOptions _options;
         #endregion Private fields
+
         #region Constructors
         /// <summary>
         /// Initialize a new instance of <see cref="DialogService{TDialog, TReturn}"/> using specified <paramref name="dialogProvider"/>
@@ -49,7 +50,6 @@ namespace Adita.PlexNet.Core.Dialogs
             _options = options.Value;
         }
         #endregion Constructors
-
 
         #region Public methods
         /// <summary>
