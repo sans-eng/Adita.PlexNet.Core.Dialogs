@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Adita.PlexNet.Core.Dialogs.Services.ContainerFactories
+namespace Adita.PlexNet.Core.Dialogs
 {
     /// <summary>
     /// Represents a dialog container factory.
