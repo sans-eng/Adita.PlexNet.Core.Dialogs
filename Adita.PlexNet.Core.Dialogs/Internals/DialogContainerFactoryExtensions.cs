@@ -80,9 +80,7 @@ namespace Adita.PlexNet.Core.Dialogs.Internals
                 throw new InvalidOperationException($"Unable to create generic method of {nameof(IDialogContainerFactory<TDialog>.Create)}.");
             }
 
-            IDialogContainer? container = genericMethod.Invoke(factory, new object?[] { dialog, dialogView, host }) as IDialogContainer;
-
-            if(container == null)
+            if (genericMethod.Invoke(factory, new object?[] { dialog, dialogView, host }) is not IDialogContainer container)
             {
                 throw new InvalidOperationException($"Unable to create container of type {containerType.Name}.");
             }
@@ -159,9 +157,7 @@ namespace Adita.PlexNet.Core.Dialogs.Internals
                 throw new InvalidOperationException($"Unable to create generic method of {nameof(IDialogContainerFactory<TDialog, TReturn>.Create)}.");
             }
 
-            IDialogContainer<TReturn>? container = genericMethod.Invoke(factory, new object?[] { dialog, dialogView, host }) as IDialogContainer<TReturn>;
-
-            if (container == null)
+            if (genericMethod.Invoke(factory, new object?[] { dialog, dialogView, host }) is not IDialogContainer<TReturn> container)
             {
                 throw new InvalidOperationException($"Unable to create container of type {genericContainerType.Name}.");
             }
@@ -239,110 +235,13 @@ namespace Adita.PlexNet.Core.Dialogs.Internals
                 throw new InvalidOperationException($"Unable to create generic method of {nameof(IDialogContainerFactory<TDialog, TReturn, TParam>.Create)}.");
             }
 
-            IDialogContainer<TReturn, TParam>? container = genericMethod.Invoke(factory, new object?[] { dialog, dialogView, host }) as IDialogContainer<TReturn, TParam>;
-
-            if (container == null)
+            if (genericMethod.Invoke(factory, new object?[] { dialog, dialogView, host }) is not IDialogContainer<TReturn, TParam> container)
             {
                 throw new InvalidOperationException($"Unable to create container of type {genericContainerType.Name}.");
             }
 
             return container;
-        }
-        /// <summary>
-        /// Creates a dialog container for specified <paramref name="dialog" />, <paramref name="dialogView" />, <paramref name="host" /> and <paramref name="containerType"/>.
-        /// </summary>
-        /// <remarks>The <paramref name="containerType"/> is specific to target platform and should be
-        /// specified on <see cref="DialogOptions"/> instance.</remarks>
-        /// <typeparam name="TDialog">The type used for the dialog.</typeparam>
-        /// <typeparam name="TReturn">The type used for the dialog return value.</typeparam>
-        /// <typeparam name="TParam">The type used for the dialog parameter.</typeparam>
-        /// <typeparam name="TView">The type used for the view of the dialog.</typeparam>
-        /// <typeparam name="THost">The type used for the dialog host.</typeparam>
-        /// <param name="factory">The <see cref="IDialogContainerFactory{TDialog, TReturn, TParam}"/> to create the container.</param>
-        /// <param name="dialog">The dialog as the content.</param>
-        /// <param name="dialogView">The view of the dialog.</param>
-        /// <param name="host">A host of the dialog.</param>
-        /// <param name="containerType">The <see cref="Type"/> of the container.</param>
-        /// <param name="factoryContext">An <see cref="SynchronizationContext"/> to create the container.</param>
-        /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> to cancel the operation.</param>
-        /// <returns>A container that has type of <paramref name="containerType"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="factory"/>, <paramref name="dialog"/>, <paramref name="dialogView"/>, <paramref name="containerType"/> or <paramref name="factoryContext"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="containerType"/> is not a valid container.</exception>
-        /// <exception cref="InvalidOperationException">Unable to get or retrieve generic method of <see cref="IDialogContainerFactory{TDialog, TReturn, TParam}.CreateAsync{TView, THost, TContainer}"/>.</exception>
-        /// <exception cref="InvalidOperationException">Unable to create container of type that specified on <paramref name="containerType"/>.</exception>
-        /// <exception cref="NotSupportedException">The implementation <see cref="CreateAsync{TDialog, TReturn, TParam, TView, THost}"/> for Windows Store apps is currently does not support.</exception>
-        public static async Task<IDialogContainer<TReturn, TParam>> CreateAsync<TDialog, TReturn, TParam, TView, THost>(
-            this IDialogContainerFactory<TDialog, TReturn, TParam> factory,
-            TDialog dialog,
-            TView dialogView,
-            THost? host,
-            Type containerType,
-            SynchronizationContext factoryContext,
-            CancellationToken cancellationToken = default)
-            where TDialog : class, IDialog<TReturn, TParam>
-            where TView : class
-            where THost : class
-        {
-            if (factory is null)
-            {
-                throw new ArgumentNullException(nameof(factory));
-            }
-
-            if (dialog is null)
-            {
-                throw new ArgumentNullException(nameof(dialog));
-            }
-
-            if (dialogView is null)
-            {
-                throw new ArgumentNullException(nameof(dialogView));
-            }
-
-            if (containerType is null)
-            {
-                throw new ArgumentNullException(nameof(containerType));
-            }
-
-            if (factoryContext is null)
-            {
-                throw new ArgumentNullException(nameof(factoryContext));
-            }
-
-            if (!containerType.GetInterfaces().Any(p => p.IsGenericType && p.GetGenericTypeDefinition() == typeof(IDialogContainer<,>)))
-            {
-                throw new ArgumentException($"{nameof(containerType)} is not valid container.");
-            }
-
-            Type genericContainerType = containerType.MakeGenericType(typeof(TReturn), typeof(TParam));
-
-            MethodInfo[] methodInfos = factory.GetType().GetMethods();
-
-            MethodInfo? methodInfo = Array.Find(
-                methodInfos,
-                p => p.Name == nameof(factory.CreateAsync) &&
-                p.ReflectedType?.GetInterfaceMap(typeof(IDialogContainerFactory<TDialog, TReturn, TParam>)).TargetMethods.Contains(p) == true);
-
-            if (methodInfo == null)
-            {
-                throw new InvalidOperationException($"Unable to retrieve {nameof(IDialogContainerFactory<TDialog, TReturn, TParam>.CreateAsync)} method.");
-            }
-
-            MethodInfo? genericMethod = methodInfo.MakeGenericMethod(dialogView.GetType(), typeof(THost), genericContainerType);
-
-            if (genericMethod == null)
-            {
-                throw new InvalidOperationException($"Unable to create generic method of {nameof(IDialogContainerFactory<TDialog, TReturn, TParam>.CreateAsync)}.");
-            }
-
-            Task<IDialogContainer<TReturn, TParam>>? container = genericMethod.Invoke(factory, new object?[] { dialog, dialogView, factoryContext, host, cancellationToken}) as Task<IDialogContainer<TReturn, TParam>>;
-
-            if (container == null)
-            {
-                throw new InvalidOperationException($"Unable to create container of type {genericContainerType.Name}.");
-            }
-
-            return await container;
-        }
+        }     
         /// <summary>
         /// Creates a dialog container for specified <paramref name="dialog" />, <paramref name="dialogView" />, <paramref name="host" /> and <paramref name="containerType"/>.
         /// </summary>
@@ -362,7 +261,12 @@ namespace Adita.PlexNet.Core.Dialogs.Internals
         /// <exception cref="ArgumentException"><paramref name="containerType"/> is not a valid container.</exception>
         /// <exception cref="InvalidOperationException">Unable to get or retrieve generic method of <see cref="IParamOnlyDialogContainerFactory{TDialog, TParam}.Create{TView, THost, TContainer}"/>.</exception>
         /// <exception cref="InvalidOperationException">Unable to create container of type that specified on <paramref name="containerType"/>.</exception>
-        public static IParamOnlyDialogContainer<TParam> Create<TDialog, TParam, TView, THost>(this IParamOnlyDialogContainerFactory<TDialog, TParam> factory, TDialog dialog, TView dialogView, THost? host, Type containerType)
+        public static IParamOnlyDialogContainer<TParam> Create<TDialog, TParam, TView, THost>(
+            this IParamOnlyDialogContainerFactory<TDialog, TParam> factory,
+            TDialog dialog,
+            TView dialogView,
+            THost? host,
+            Type containerType)
             where TDialog : class, IParamOnlyDialog<TParam>
             where TView : class
             where THost : class
@@ -413,16 +317,13 @@ namespace Adita.PlexNet.Core.Dialogs.Internals
                 throw new InvalidOperationException($"Unable to create generic method of {nameof(IParamOnlyDialogContainerFactory<TDialog, TParam>.Create)}.");
             }
 
-            IParamOnlyDialogContainer<TParam>? container = genericMethod.Invoke(factory, new object?[] { dialog, dialogView, host }) as IParamOnlyDialogContainer<TParam>;
-
-            if (container == null)
+            if (genericMethod.Invoke(factory, new object?[] { dialog, dialogView, host }) is not IParamOnlyDialogContainer<TParam> container)
             {
                 throw new InvalidOperationException($"Unable to create container of type {genericContainerType.Name}.");
             }
 
             return container;
-        }
-
+        }       
         #endregion Public methods
     }
 }
