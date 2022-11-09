@@ -15,12 +15,6 @@
         /// <returns>A <see cref="DialogResult{TReturn}"/> as a result of the dialog.</returns>
         DialogResult<TReturn> ShowDialog(TParam param);
         /// <summary>
-        /// Opens a dialog using specified <paramref name="param"/> and return the result after dialog is closed asynchronously.
-        /// </summary>
-        /// <param name="param">A parameter to be used for initializing the dialog.</param>
-        /// <returns>A <see cref="Task"/> that represents an asynchronous operation which contans a <see cref="DialogResult{TReturn}"/> as a result of the dialog.</returns>
-        Task<DialogResult<TReturn>> ShowDialogAsync(TParam param);
-        /// <summary>
         /// Sets the host of type <typeparamref name="THost"/> to the dialog.
         /// </summary>
         /// <typeparam name="THost">The type used for the dialog.</typeparam>

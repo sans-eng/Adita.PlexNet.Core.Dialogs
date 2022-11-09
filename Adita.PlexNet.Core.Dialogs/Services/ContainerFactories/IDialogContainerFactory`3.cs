@@ -24,27 +24,6 @@
             where TView : class
             where THost : class
              where TContainer : class, IDialogContainer<TReturn, TParam>, new();
-        /// <summary>
-        /// Creates a dialog container for specified <paramref name="dialog"/>, <paramref name="view"/> and <paramref name="host"/> asynchronously.
-        /// </summary>
-        /// <typeparam name="TView">The type used for the view of the dialog.</typeparam>
-        /// <typeparam name="TContainer">The type used for the container.</typeparam>
-        /// <typeparam name="THost">The type used for the dialog host.</typeparam>
-        /// <param name="dialog">The dialog as the content.</param>
-        /// <param name="view">The view of the dialog.</param>
-        /// <param name="factoryContext">An <see cref="SynchronizationContext"/> to create the container.</param>
-        /// <param name="host">An optional host of the dialog.</param>
-        /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> to cancel the operation.</param>
-        /// <returns>A <see cref="Task"/> that represents an asynchronous operation which contains a container of type <typeparamref name="TContainer"/>.</returns>
-        Task<TContainer> CreateAsync<TView, THost, TContainer>(
-            TDialog dialog,
-            TView view,
-            SynchronizationContext factoryContext,
-            THost? host = default,
-            CancellationToken cancellationToken = default)
-            where TView : class
-            where THost : class
-           where TContainer : class, IDialogContainer<TReturn, TParam>, new();
         #endregion Methods
     }
 }

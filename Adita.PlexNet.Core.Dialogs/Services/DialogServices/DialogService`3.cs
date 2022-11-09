@@ -98,59 +98,6 @@ namespace Adita.PlexNet.Core.Dialogs
 
             return container.ShowDialog(parameter);
         }
-        /// <summary>
-        /// Shows a dialog that has specified <typeparamref name="TDialog" /> type using specified <paramref name="parameter"/> and return the result asynchronously.
-        /// </summary>
-        /// <param name="parameter">A parameter for the dialog.</param>
-        /// <param name="serviceContext">An <see cref="SynchronizationContext"/> to shows the dialog.</param>
-        /// <param name="cancellationToken">An optional <see cref="CancellationToken"/> to cancel the operation.</param>
-        /// <returns>A <see cref="Task"/> that represents an asynchronous operation which contains a <see cref="DialogResult{TReturn}" /> of the dialog.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="TDialog"/> is not registered as dialog.</exception>
-        /// <exception cref="InvalidOperationException"><see cref="DialogOptions.ViewType"/>,
-        /// <see cref="DialogOptions.HostType"/> or <see cref="DialogOptions.ContainerWithReturnAndParamType"/> is <c>null</c>.</exception>
-        /// <exception cref="OperationCanceledException">The <paramref name="cancellationToken"/> has been canceled.</exception>
-        /// <exception cref="TaskCanceledException">The task has been canceled.</exception>
-        /// <exception cref="ObjectDisposedException">The <see cref="CancellationTokenSource"/> associated with <paramref name="cancellationToken"/> was disposed.</exception>
-        /// <exception cref="NotSupportedException">The implementation <see cref="ShowDialogAsync"/> for Windows Store apps is currently does not support.</exception>
-        public async Task<DialogResult<TReturn>> ShowDialogAsync(TParam parameter, SynchronizationContext serviceContext, CancellationToken cancellationToken = default)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            TDialog? dialog = _dialogProvider.GetDialog();
-
-            if (dialog == null)
-            {
-                throw new ArgumentException($"Specified {nameof(TDialog)} is not registered as dialog.");
-            }
-
-            if (_options.ViewType == null)
-            {
-                throw new InvalidOperationException($"{nameof(DialogOptions.ViewType)} is not set.");
-            }
-
-            if (_options.HostType == null)
-            {
-                throw new InvalidOperationException($"{nameof(DialogOptions.HostType)} is not set.");
-            }
-
-            if (_options.ContainerWithReturnAndParamType == null)
-            {
-                throw new InvalidOperationException($"{nameof(DialogOptions.ContainerWithReturnAndParamType)} is not set.");
-            }
-
-            object? dialogView = _dialogViewProvider.GetView<TDialog>(_options.ViewType);
-
-            if (dialogView == null)
-            {
-                return new(DialogActionResult.None);
-            }
-
-            object? host = _dialogHostProvider.GetHost<TDialog>(_options.HostType);
-
-            IDialogContainer<TReturn, TParam> container = await _dialogContainerFactory.CreateAsync(dialog, dialogView, host, _options.ContainerWithReturnAndParamType, serviceContext, cancellationToken);
-
-            return await container.ShowDialogAsync(parameter);
-        }
         #endregion Public methods
     }
 }
