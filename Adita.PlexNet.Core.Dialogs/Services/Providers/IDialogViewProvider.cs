@@ -7,12 +7,11 @@
     {
         #region Methods
         /// <summary>
-        /// Gets a dialog view which has type of <typeparamref name="TView"/> for specified <typeparamref name="TDialog"/> type.
+        /// Gets a dialog view for specified <typeparamref name="TDialog"/> type if exist.
         /// </summary>
-        /// <typeparam name="TView">The type used for the dialog view.</typeparam>
         /// <typeparam name="TDialog">The type used for the dialog.</typeparam>
-        /// <returns>A <typeparamref name="TView"/> as dialog view.</returns>
-        TView? GetView<TView, TDialog>() where TView : class;
+        /// <returns>A dialog view otherwise <see langword="null"/>.</returns>
+        object? GetView<TDialog>();
         #endregion Methods
     }
 }

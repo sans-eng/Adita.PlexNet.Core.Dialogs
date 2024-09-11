@@ -1,4 +1,6 @@
-﻿namespace Adita.PlexNet.Core.Dialogs.Test.Models
+﻿using Adita.PlexNet.Core.Dialogs.Test.Models;
+
+namespace Adita.PlexNet.Core.Dialogs.Test.Tests
 {
     [TestClass]
     public class DialogTest
@@ -71,10 +73,10 @@
         }
 
         [TestMethod]
-        public void CanCreateDialogWithReturnAndParam()
+        public async Task CanCreateDialogWithReturnAndParamAsync()
         {
             DialogWithReturnAndParamDummy dialog = new();
-            dialog.Initialize("Test");
+            await dialog.InitializeAsync("Test");
 
             DialogActionResult dialogAction = DialogActionResult.None;
             double? returnValue = default;
@@ -113,10 +115,10 @@
         }
 
         [TestMethod]
-        public void CanCreateParamOnlyDialog()
+        public async Task CanCreateParamOnlyDialogAsync()
         {
             ParamOnlyDialogDummy dialog = new();
-            dialog.Initialize("Test");
+            await dialog.InitializeAsync("Test");
 
             DialogActionResult dialogAction = DialogActionResult.None;
 

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Adita.PlexNet.Core.Dialogs.Test.Services
+namespace Adita.PlexNet.Core.Dialogs.Test.Tests
 {
     [TestClass]
     public class DialogProviderTest

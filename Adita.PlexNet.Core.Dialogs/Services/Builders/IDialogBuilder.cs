@@ -44,12 +44,6 @@ namespace Adita.PlexNet.Core.Dialogs
         /// <returns>Current builder to chain operations.</returns>
         IDialogBuilder ConfigureDialogOptions(Action<DialogOptions> configureAction);
         /// <summary>
-        /// Adds message service to current builder.
-        /// </summary>
-        /// <remarks>Call this method multiple times will not affect anything.</remarks>
-        /// <returns>Current builder to chain operations.</returns>
-        public IDialogBuilder AddMessageService();
-        /// <summary>
         /// Builds a dialog environment and return the result.
         /// </summary>
         /// <returns>A <see cref="IDialogEnvironment"/>.</returns>

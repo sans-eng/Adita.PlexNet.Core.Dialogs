@@ -35,9 +35,11 @@ namespace Adita.PlexNet.Core.Dialogs.Test.Models
             Abort();
         }
 
-        public override void Initialize(string parameter)
+        public override async Task InitializeAsync(string parameter)
         {
             Parameter = parameter;
+
+            await Task.CompletedTask;
         }
     }
 }
