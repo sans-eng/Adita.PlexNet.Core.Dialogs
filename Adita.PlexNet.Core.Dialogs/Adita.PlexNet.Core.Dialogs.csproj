@@ -18,7 +18,7 @@
     <PackageTags>dialog; net6; net; core;</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Bug fixed on wrong registering dialog to services</PackageReleaseNotes>
+    <PackageReleaseNotes>V2 initial release</PackageReleaseNotes>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
