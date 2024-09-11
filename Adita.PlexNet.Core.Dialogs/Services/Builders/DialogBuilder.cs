@@ -129,26 +129,6 @@ namespace Adita.PlexNet.Core.Dialogs
             Services.Configure(configureAction);
             return this;
         }
-        /// <summary>
-        /// Adds message service to current builder.
-        /// </summary>
-        /// <remarks>Call this method multiple times will not affect anything.</remarks>
-        /// <returns>Current <see cref="DialogBuilder"/> to chain operations.</returns>
-        public IDialogBuilder AddMessageService()
-        {
-            Services.RemoveAll<MessageDialog>();
-            Services.RemoveAll<IMessageDialogService>();
-            Services.RemoveAll<IDialogProvider<MessageDialog>>();
-            Services.RemoveAll<IParamOnlyDialogContainerFactory<MessageDialog, MessageParameter>>();
-
-            Services.TryAddTransient<MessageDialog>();
-            Services.TryAddScoped<IMessageDialogService, MessageDialogService>();
-            Services.TryAddScoped<IDialogProvider<MessageDialog>, DialogProvider<MessageDialog>>();
-            Services.TryAddScoped<IParamOnlyDialogContainerFactory<MessageDialog, MessageParameter>,
-                ParamOnlyDialogContainerFactory<MessageDialog, MessageParameter>>();
-
-            return this;
-        }
         #endregion Public methods
 
         #region Private methods

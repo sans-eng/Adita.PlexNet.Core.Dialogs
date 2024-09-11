@@ -52,49 +52,22 @@ namespace Adita.PlexNet.Core.Dialogs
         #endregion Constructors
 
         #region Public methods
-        /// <summary>
-        /// Shows a dialog that has specified <typeparamref name="TDialog" /> type using specified <paramref name="parameter"/> and return the result.
-        /// </summary>
-        /// <returns>A <see cref="DialogResult" /> of the dialog.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="TDialog"/> is not registered as dialog.</exception>
-        /// <exception cref="InvalidOperationException"><see cref="DialogOptions.ViewType"/>,
-        /// <see cref="DialogOptions.HostType"/> or <see cref="DialogOptions.ContainerOnlyParamType"/> is <c>null</c>.</exception>
-        public DialogResult ShowDialog(TParam parameter)
+        /// <inheritdoc/>
+        public async Task<DialogResult> ShowDialogAsync(TParam parameter, CancellationToken cancellationToken=default)
         {
-            TDialog? dialog = _dialogProvider.GetDialog();
+            TDialog? dialog = _dialogProvider.GetDialog() ?? throw new ArgumentException($"Specified {nameof(TDialog)} is not registered.");
 
-            if (dialog == null)
+            if (_options.TargetPlatformOnlyParamContainerType == null)
             {
-                throw new ArgumentException($"Specified {nameof(TDialog)} is not registered as dialog.");
+                throw new InvalidOperationException($"{nameof(DialogOptions.TargetPlatformOnlyParamContainerType)} is not set.");
             }
 
-            if (_options.ViewType == null)
-            {
-                throw new InvalidOperationException($"{nameof(DialogOptions.ViewType)} is not set.");
-            }
+            var dialogView = _dialogViewProvider.GetView<TDialog>() ?? throw new ArgumentException($"The view for specifiied {typeof(TDialog)} is not registered.");
+            var host = _dialogHostProvider.GetHost<TDialog>() ?? throw new ArgumentException($"The host for specifiied {typeof(TDialog)} is not registered.");
 
-            if (_options.HostType == null)
-            {
-                throw new InvalidOperationException($"{nameof(DialogOptions.HostType)} is not set.");
-            }
+            IParamOnlyDialogContainer<TParam> container = _dialogContainerFactory.Create(dialog, dialogView, host, _options.TargetPlatformOnlyParamContainerType);
 
-            if (_options.ContainerOnlyParamType == null)
-            {
-                throw new InvalidOperationException($"{nameof(DialogOptions.ContainerOnlyParamType)} is not set.");
-            }
-
-            object? dialogView = _dialogViewProvider.GetView<TDialog>(_options.ViewType);
-
-            if (dialogView == null)
-            {
-                return new(DialogActionResult.None);
-            }
-
-            object? host = _dialogHostProvider.GetHost<TDialog>(_options.HostType);
-
-            IParamOnlyDialogContainer<TParam> container = _dialogContainerFactory.Create(dialog, dialogView, host, _options.ContainerOnlyParamType);
-
-            return container.ShowDialog(parameter);
+            return await container.ShowDialogAsync(parameter, cancellationToken);
         }
         #endregion Public methods
     }

@@ -27,20 +27,11 @@
 
         #region Public methods
         /// <summary>
-        /// When overriden, use this to initialize the dialog using specified <paramref name="parameter" />.
-        /// </summary>
-        /// <param name="parameter">A parameter for the dialog.</param>
-        public virtual void Initialize(TParam parameter) { }
-
-        /// <summary>
-        /// When overriden, use this to initialize the dialog using specified <paramref name="parameter" /> asyncronously.
+        /// When implemented, use this to initialize the dialog using specified <paramref name="parameter" /> asyncronously.
         /// </summary>
         /// <param name="parameter">A parameter for the dialog.</param>
         /// <returns>A <see cref="Task" /> that represents an asynchronous operation.</returns>
-        public virtual Task InitializeAsync(TParam parameter)
-        {
-            return Task.CompletedTask;
-        }
+        public abstract Task InitializeAsync(TParam parameter);
         #endregion Public methods
 
         #region Protected methods

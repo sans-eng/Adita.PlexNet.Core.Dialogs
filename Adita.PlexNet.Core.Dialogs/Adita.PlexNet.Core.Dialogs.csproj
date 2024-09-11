@@ -8,9 +8,9 @@
     <Title>Adita.PlexNet.Core.Dialogs</Title>
     <Authors>Setya Adi Kurnia</Authors>
     <Company>Adita</Company>
-    <Version>1.0.2.0</Version>
+    <Version>2.0.0.0</Version>
     <Description>A core dialogs library that targeting .NET 6</Description>
-    <Copyright>© 2022 Adita</Copyright>
+    <Copyright>© 2024 Adita</Copyright>
     <PackageProjectUrl>https://plexdotnet.adita-engineering.com</PackageProjectUrl>
     <PackageIcon>favicon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -19,6 +19,7 @@
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>Bug fixed on wrong registering dialog to services</PackageReleaseNotes>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

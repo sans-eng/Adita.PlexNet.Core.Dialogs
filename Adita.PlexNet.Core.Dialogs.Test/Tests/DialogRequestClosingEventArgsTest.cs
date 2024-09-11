@@ -1,4 +1,4 @@
-﻿namespace Adita.PlexNet.Core.Dialogs.Test.Models
+﻿namespace Adita.PlexNet.Core.Dialogs.Test.Tests
 {
     [TestClass]
     public class DialogRequestClosingEventArgsTest

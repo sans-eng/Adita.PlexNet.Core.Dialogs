@@ -1,4 +1,5 @@
-﻿namespace Adita.PlexNet.Core.Dialogs.Test.Models
+﻿
+namespace Adita.PlexNet.Core.Dialogs.Test.Models
 {
     public class DialogWithReturnAndParamDummy : Dialog<double?, string>
     {
@@ -29,9 +30,10 @@
             Abort();
         }
 
-        public override void Initialize(string parameter)
+        public override async Task InitializeAsync(string parameter)
         {
-            Parameter = parameter;
+            Parameter = parameter ?? string.Empty;
+            await Task.CompletedTask;
         }
     }
 }

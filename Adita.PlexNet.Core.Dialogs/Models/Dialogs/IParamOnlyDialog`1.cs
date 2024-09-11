@@ -22,11 +22,6 @@
 
         #region Methods
         /// <summary>
-        /// Initialize the dialog using specified <paramref name="parameter"/>.
-        /// </summary>
-        /// <param name="parameter">A parameter for the dialog.</param>
-        void Initialize(TParam parameter);
-        /// <summary>
         /// Initialize the dialog using specified <paramref name="parameter"/> asyncronously.
         /// </summary>
         /// <param name="parameter">A parameter for the dialog.</param>

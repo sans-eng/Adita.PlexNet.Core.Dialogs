@@ -7,12 +7,11 @@
     {
         #region Methods
         /// <summary>
-        /// Gets a dialog host of specified <typeparamref name="THost"/> type for specified <typeparamref name="TDialog"/> type.
+        /// Gets a dialog host for specified <typeparamref name="TDialog"/> type if exist.
         /// </summary>
-        /// <typeparam name="THost">The type used for the dialog host.</typeparam>
         /// <typeparam name="TDialog">The type used for the dialog.</typeparam>
-        /// <returns>A <typeparamref name="THost"/> as dialog host.</returns>
-        THost? GetHost<THost, TDialog>() where THost : class;
+        /// <returns>A dialog host otherwise <see langword="null"/>.</returns>
+        object? GetHost<TDialog>();
         #endregion Methods
     }
 }
