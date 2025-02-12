@@ -1,4 +1,6 @@
-﻿using Adita.PlexNet.Core.Dialogs.Test.Models;
+﻿using Adita.PlexNet.Core.Dialogs.Abstractions.Providers;
+using Adita.PlexNet.Core.Dialogs.Providers;
+using Adita.PlexNet.Core.Dialogs.Test.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

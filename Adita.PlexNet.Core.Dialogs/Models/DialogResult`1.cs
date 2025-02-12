@@ -1,4 +1,6 @@
-﻿namespace Adita.PlexNet.Core.Dialogs
+﻿using Adita.PlexNet.Core.Dialogs.Abstractions.DialogResults;
+
+namespace Adita.PlexNet.Core.Dialogs
 {
     /// <summary>
     /// Represents a dialog result that has a return value.

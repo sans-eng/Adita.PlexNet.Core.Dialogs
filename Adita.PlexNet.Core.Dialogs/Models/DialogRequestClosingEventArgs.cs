@@ -1,4 +1,6 @@
-﻿namespace Adita.PlexNet.Core.Dialogs
+﻿using Adita.PlexNet.Core.Dialogs.Abstractions.Dialogs;
+
+namespace Adita.PlexNet.Core.Dialogs
 {
     /// <summary>
     /// Represents an event data for <see cref="IDialog.RequestClosing"/> event.

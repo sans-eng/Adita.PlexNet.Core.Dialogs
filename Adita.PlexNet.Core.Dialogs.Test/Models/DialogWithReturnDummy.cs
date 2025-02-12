@@ -1,4 +1,6 @@
-﻿namespace Adita.PlexNet.Core.Dialogs.Test.Models
+﻿using Adita.PlexNet.Core.Dialogs.Abstractions.Dialogs;
+
+namespace Adita.PlexNet.Core.Dialogs.Test.Models
 {
     public class DialogWithReturnDummy : Dialog<double?>
     {
