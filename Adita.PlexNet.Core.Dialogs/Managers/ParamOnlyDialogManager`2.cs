@@ -13,7 +13,7 @@ namespace Adita.PlexNet.Core.Dialogs.Managers
     /// </summary>
     /// <typeparam name="TDialog">The type of the dialog.</typeparam>
     /// <typeparam name="TParam">The type of the dialog parameter.</typeparam>
-    public class ParamOnlyDialogManager<TDialog, TParam> : IParamOnlyDialogService<TDialog, TParam>
+    public class ParamOnlyDialogManager<TDialog, TParam> : IParamOnlyDialogManager<TDialog, TParam>
         where TDialog : class, IParamOnlyDialog<TParam>
     {
         #region Private fields

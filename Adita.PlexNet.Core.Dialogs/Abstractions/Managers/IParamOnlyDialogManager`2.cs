@@ -3,11 +3,11 @@
 namespace Adita.PlexNet.Core.Dialogs.Abstractions.Managers
 {
     /// <summary>
-    /// Provides a mechanism for a dialog service.
+    /// Provides a mechanism for a dialog manager.
     /// </summary>
     /// <typeparam name="TDialog">The type of the dialog.</typeparam>
     /// <typeparam name="TParam">The type of the dialog parameter.</typeparam>
-    public interface IParamOnlyDialogService<TDialog, TParam>
+    public interface IParamOnlyDialogManager<TDialog, TParam>
         where TDialog : class, IParamOnlyDialog<TParam>
     {
         #region Methods

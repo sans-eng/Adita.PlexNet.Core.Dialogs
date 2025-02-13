@@ -84,7 +84,7 @@ namespace Adita.PlexNet.Core.Dialogs.Builders
                 Services.TryAddTransient(typeof(IParamOnlyDialogContainerFactory<,>).MakeGenericType(typeof(TDialog), paramType),
                    typeof(ParamOnlyDialogContainerFactory<,>).MakeGenericType(typeof(TDialog), paramType));
 
-                Services.TryAddTransient(typeof(IParamOnlyDialogService<,>).MakeGenericType(typeof(TDialog), paramType),
+                Services.TryAddTransient(typeof(IParamOnlyDialogManager<,>).MakeGenericType(typeof(TDialog), paramType),
                     typeof(ParamOnlyDialogManager<,>).MakeGenericType(typeof(TDialog), paramType));
             }
             else
