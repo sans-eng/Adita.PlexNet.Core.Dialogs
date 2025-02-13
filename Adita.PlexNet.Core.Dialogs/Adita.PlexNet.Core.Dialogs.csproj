@@ -8,7 +8,7 @@
     <Title>Adita.PlexNet.Core.Dialogs</Title>
     <Authors>Setya Adi Kurnia</Authors>
     <Company>Adita</Company>
-    <Version>3.0.0.1</Version>
+    <Version>3.0.1.0</Version>
     <Description>A core dialogs library that targeting .NET 9</Description>
     <Copyright>© 2025 Adita</Copyright>
     <PackageProjectUrl>https://plexdotnet.adita-engineering.com</PackageProjectUrl>
